@@ -1,0 +1,4 @@
+﻿MyApp.
+service("UserService", function () {
+
+})

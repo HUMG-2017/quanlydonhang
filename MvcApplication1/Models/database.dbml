@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QLDH" Class="databaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=PCDEV4\SQLEXPRESS;Initial Catalog=QLDH;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="QLDHConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.KenhTinBaiViet" Member="KenhTinBaiViets">
+    <Type Name="KenhTinBaiViet">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NoiDung" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MaCapTren" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TinBaiViet" Member="TinBaiViets">
+    <Type Name="TinBaiViet">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TieuDe" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TomTat" Type="System.String" DbType="NVarChar(800)" CanBeNull="true" />
+      <Column Name="NoiDung" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TacGia" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="IdKenhTin" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LichSuDonHang" Member="LichSuDonHangs">
+    <Type Name="LichSuDonHang">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdDonHang" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TaiKhoanKhach" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KhoHangGui" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NguoiGui" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="KhoHangNhan" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NguoiNhan" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TrangThai" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ThoiDiemXuLy" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QuanLyDonHang" Member="QuanLyDonHangs">
+    <Type Name="QuanLyDonHang">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TaiKhoanDatHang" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TaiKhoanKhach" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TenHang" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="TenKhach" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="LinkSP" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="GiaSP" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DatCoc" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GiaSPCanThu" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CanNang" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="TheTich" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CuocVanChuyen" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="HangVanChuyen" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MaVanChuyen" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TrangThaiDonHang" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KhoHangNhan" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ChuyenPhat" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="NguoiNhanCuoi" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="KhoHangCuoi" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="OrderNumber" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="NgayDatHang" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QuanLyKhoHang" Member="QuanLyKhoHangs">
+    <Type Name="QuanLyKhoHang">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DiaChiKhoHang" Type="System.String" DbType="NVarChar(300)" CanBeNull="true" />
+      <Column Name="TenKho" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="CapKho" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TinhTrang" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GhiChu" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QuanLyLoHang" Member="QuanLyLoHangs">
+    <Type Name="QuanLyLoHang">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ListIdDonHang" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CuocQuaBien" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CuocVeKho" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="NguoiChuyenBien" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="NguoiNhanKho" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ThoiGian" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QuanLyTaiKhoan" Member="QuanLyTaiKhoans">
+    <Type Name="QuanLyTaiKhoan">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="isFacebook" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TaiKhoan" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="MatKhau" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Facebook" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Mail" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="IdKhoHang" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
