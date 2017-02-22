@@ -1,4 +1,4 @@
-<div class="container">
+﻿<div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <div class="login-panel panel panel-default">
@@ -9,18 +9,18 @@
                     <form role="form">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                                <input ng-model="currentUser.TaiKhoan" class="form-control" placeholder="Tên đăng nhập" name="email" type="text" autofocus>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                <input ng-model="currentUser.MatKhau" class="form-control" placeholder="Mật khẩu" name="password" type="password" value="">
                             </div>
                             <div class="checkbox">
                                 <label>
-                                    <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                    <input ng-model="currentUser.Remember" name="remember" type="checkbox" value="Ghi nhớ đăng nhập">Ghi nhớ đăng nhập
                                 </label>
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
-                            <a class="btn btn-lg btn-success btn-block">Login</a>
+                            <a ng-click="Login()" class="btn btn-lg btn-success btn-block">Login</a>
                         </fieldset>
                     </form>
                 </div>

@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Newtonsoft.Json;
 using System.Web.Script.Serialization;
+using System.Web;
 
 
 namespace MvcApplication1.Controllers
@@ -39,28 +40,31 @@ namespace MvcApplication1.Controllers
 
                 databaseDataContext db = new databaseDataContext();
 
-                var result = from table in db.QuanLyTaiKhoans
-                           where table.TaiKhoan == TaiKhoan
-                           select table;
-                if (result.Count() == 1 )
-                {
-                    string getMatKhau="";
-                    foreach (var a in result)
+                QuanLyTaiKhoan result = db.QuanLyTaiKhoans.Where(o => o.TaiKhoan == TaiKhoan).SingleOrDefault();
+                if (result != null) { 
+                
+                    if (MatKhau.Equals(result.MatKhau))
                     {
-                        getMatKhau = a.MatKhau;
-                    }
-                    if (MatKhau.Equals(getMatKhau))
-                    {
+                        //Cache Session
+                        HttpContext.Current.Session.Add("Role", result.IdKhoHang);
+                        HttpContext.Current.Session.Add("UserName", result.TaiKhoan);
+                        HttpContext.Current.Session.Add("Id", result.Id);
+
                         var token = JwtManager.GenerateToken(TaiKhoan);
                         return Request.CreateResponse(HttpStatusCode.OK, token);
                     }
+
+                    HttpError myCustomError = new HttpError("Sai mật khẩu.") { { "CustomErrorCode", 40 } };
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, myCustomError);
+                }else {
+                    HttpError errTk = new HttpError("Không có tài khoản") { { "CustomErrorCode", 41 } };
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, errTk);
                 }
 
-                return Request.CreateResponse(HttpStatusCode.OK,user);
             }
             catch (Exception)
             {
-                HttpError myCustomError = new HttpError("Khong co tai khoan hoac mat khau.") { { "CustomErrorCode", 42 } };
+                HttpError myCustomError = new HttpError("Tai khoản và mật khẩu không được trống.") { { "CustomErrorCode", 42 } };
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, myCustomError);
                 //throw;
             }

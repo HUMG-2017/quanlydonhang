@@ -4,7 +4,7 @@
 
 <html class="no-js" xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Quản lý đơn hàng</title>
+    <title ng-bind="$state.current.data.pageTitle">Quản Lý Đơn Hàng</title>
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
@@ -42,6 +42,7 @@
     
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="App/scripts/app.js"></script>
+        <script src="App/scripts/services/UserService.js"></script>
         <script src="App/js/sb-admin-2.js"></script>
     <!-- endbuild -->
 

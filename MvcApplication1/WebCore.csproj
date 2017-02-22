@@ -459,6 +459,7 @@
     <Content Include="App\scripts\app.js" />
     <Content Include="App\scripts\controllers\chartContoller.js" />
     <Content Include="App\scripts\controllers\form.js" />
+    <Content Include="App\scripts\controllers\loginController.js" />
     <Content Include="App\scripts\controllers\main.js" />
     <Content Include="App\scripts\directives\chat\chat.html" />
     <Content Include="App\scripts\directives\chat\chat.js" />
