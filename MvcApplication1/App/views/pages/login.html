@@ -9,10 +9,10 @@
                     <form role="form">
                         <fieldset>
                             <div class="form-group">
-                                <input ng-model="currentUser.TaiKhoan" class="form-control" placeholder="Tên đăng nhập" name="email" type="text" autofocus>
+                                <input ng-model="currentUser.TaiKhoan" class="form-control" placeholder="Tên đăng nhập" name="taikhoan" type="text" autofocus>
                             </div>
                             <div class="form-group">
-                                <input ng-model="currentUser.MatKhau" class="form-control" placeholder="Mật khẩu" name="password" type="password" value="">
+                                <input ng-keydown="checkkey($event)" ng-model="currentUser.MatKhau" class="form-control" placeholder="Mật khẩu" name="matkhau" type="password" value="">
                             </div>
                             <div class="checkbox">
                                 <label>

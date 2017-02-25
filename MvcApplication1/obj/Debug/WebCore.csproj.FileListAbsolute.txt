@@ -113,6 +113,6 @@ D:\GITHUB\quanlydonhang\MvcApplication1\bin\System.Web.Razor.xml
 D:\GITHUB\quanlydonhang\MvcApplication1\bin\System.Web.WebPages.xml
 D:\GITHUB\quanlydonhang\MvcApplication1\bin\System.Web.WebPages.Deployment.xml
 D:\GITHUB\quanlydonhang\MvcApplication1\bin\System.Web.WebPages.Razor.xml
+D:\GITHUB\quanlydonhang\MvcApplication1\obj\Debug\WebCore.csprojResolveAssemblyReference.cache
 D:\GITHUB\quanlydonhang\MvcApplication1\obj\Debug\MvcApplication1.dll
 D:\GITHUB\quanlydonhang\MvcApplication1\obj\Debug\MvcApplication1.pdb
-D:\GITHUB\quanlydonhang\MvcApplication1\obj\Debug\WebCore.csprojResolveAssemblyReference.cache

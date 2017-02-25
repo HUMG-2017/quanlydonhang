@@ -7,5 +7,6 @@
  * Controller of the qlVanChuyenApp
  */
 angular.module('qlVanChuyenApp')
-  .controller('MainCtrl', function($scope,$position) {
+  .controller('MainCtrl', function ($scope, $position,$rootScope) {
+     
   });

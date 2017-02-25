@@ -1,0 +1,213 @@
+﻿
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Quản lý đơn hàng</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+    <div class="col-lg-3">
+        <select id="select-kho" class="form-control">
+            <option selected value="all">Tất cả các kho</option>
+            <option value="two">Kho hàng cấp 1</option>
+            <option value="three">Kho hàng cấp 2</option>
+        </select>
+    </div>
+    <!--Loc theo ma don hang-->
+    <div class="col-lg-6 col-lg-push-3">
+        <div class="input-group filter-table">
+            <input type="text" class="form-control" name="x" placeholder="Nhập mã đơn hàng...">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span> Tìm kiếm</button>
+            </span>
+        </div>
+    </div>
+
+    <!-- /.col-lg-12 -->
+    <!--Danh sách-->
+    <div class="col-lg-12 role-0">
+        <div class="card card-don-hang">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item li-{{$index%2}}" ng-repeat="donhang in ListDonHangRole0 track by $index">
+                    <div class="row">
+                        <div class="col-lg-1 no-padding-lr text-center wrapper-input">
+                            <input type="checkbox" class="">
+                        </div>
+                        <div class="col-lg-3 no-padding-lr">
+                            <p><span>Tên hàng: </span><span>{{donhang.TenHang}}</span></p>
+                            <p><span>Tên khách: </span><span>{{donhang.TenKhach}}</span></p>
+                            <p><span>Giá sản phẩm: </span><span>{{donhang.GiaSP}}</span></p>
+                            <p><span>Đặt cọc: </span><span>{{donhang.DatCoc}}</span></p>
+                            <p><span>Giá cần thu: </span>{{donhang.GiaSPCanThu}}<span></span></p>
+                        </div>
+                        <div class="col-lg-3 no-padding-right">
+                            <p><span>Cân nặng: </span><span></span></p>
+                            <p><span>Thể tích: </span><span></span></p>
+                            <p><span>Cước vận chuyển: </span><span></span></p>
+                            <p><span>Hãng vận chuyển: </span><span></span></p>
+                            <p><span>Mã vận chuyển: </span><span></span></p>
+                            <p><span>Trạng thái đơn hàng: </span><span></span></p>
+                        </div>
+                        <div class="col-lg-3 no-padding-right">
+                            <p><span>Cân nặng: </span><span></span></p>
+                            <p><span>Thể tích: </span><span></span></p>
+                            <p><span>Cước vận chuyển: </span><span></span></p>
+                            <p><span>Hãng vận chuyển: </span><span></span></p>
+                            <p><span>Mã vận chuyển: </span><span></span></p>
+                            <p><span>Trạng thái đơn hàng: </span><span></span></p>
+                        </div>
+                        <div class="col-lg-1 no-padding-right right-content">
+                            <a data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></a>
+                            <a data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button></a>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+
+        <input type="text" datetime="dd/MM/yyyy" ng-model="myDate" class="form-control"/> {{myDate}}
+
+        <!--Phan trang-->
+        <!--<div class="col-lg-12">
+            <paging page="DonHang.Paging.currentPage"
+                    page-size="DonHang.Paging.pageSize"
+                    total="DonHang.Paging.total"
+                    paging-action="DonHang.Paging.changePage(page)"
+                    show-prev-next="true"
+                    show-first-last="true"
+                    text-title-page="Trang {page} "
+                    text-title-first="Đến trang đầu tiên"
+                    text-title-last="Đến trang cuối cùng"
+                    text-title-next="Trang tiếp theo"
+                    text-title-prev="Quay lại trang trước">
+            </paging>
+        </div>-->
+        <!--Model them moi-->
+        <div class="modal modal-lg fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">Thêm mới đơn hàng</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group col-lg-4">
+                                <label for="tenkhachhang">Tên khách hàng:</label>
+                                <input ng-model="donhang.TenKhachHang" type="text" class="form-control" id="tenkhachhang" placeholder="Email">
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label for="dienthoai">Số điện thoại:</label>
+                                <input type="tel" class="form-control" id="dienthoai" placeholder="Email" name="field" ng-model="phoneNumber">
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label for="tensanpham">Tên sản phẩm:</label>
+                                <input type="text" class="form-control" id="tensanpham" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-4">
+                                <label for="soluong">Số lượng:</label>
+                                <input type="number" class="form-control" id="soluong" placeholder="Email">
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label for="giasanpham">Giá sản phẩm:</label>
+                                <input ng-change="TinhGiaSPCanThu()" type="text" class="form-control" id="giasanpham" placeholder="Email" name="field" ng-model="donhang.GiaSP" ui-money-mask="0">
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label for="datcoc">Đặt cọc :</label>
+                                <input ng-change="TinhGiaSPCanThu()" type="text" class="form-control" id="datcoc" placeholder="Email" name="field" ng-model="donhang.DatCoc" ui-money-mask="0">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-4">
+                                <label for="giacanthu">Giá sản phẩm cần thu :</label>
+                                <input ng-disabled="true" type="text" class="form-control" id="giacanthu" placeholder="Email" name="field" ng-model="donhang.GiaSPCanThu" ui-money-mask="0">
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label for="soluong">Số lượng: </label>
+                                <input type="number" class="form-control" id="soluong" placeholder="Email">
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label for="giasanpham">Cân nặng:</label>
+                                <input type="text" class="form-control" ng-model="donhang.ThoiGian" datetime-picker date-format="yyyy-MM-dd" date-only />
+                            </div>
+                        </div>
+                        <div class="row">
+
+                        </div>
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+        <!-- Model -->
+        <div class="modal modal-lg fade" id="edit2" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input class="form-control " type="text" placeholder="Mohsin">
+                        </div>
+                        <div class="form-group">
+
+                            <input class="form-control " type="text" placeholder="Irshad">
+                        </div>
+                        <div class="form-group">
+                            <textarea rows="2" class="form-control" placeholder="CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan"></textarea>
+
+
+                        </div>
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+
+
+        <div class="modal modal-lg fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?</div>
+
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+
+        </div>
+    </div>
+</div>
+
+<div class="row Lo-Hang" >
+    <div ng-include="'App/scripts/directives/lohang/lohang.html'">
+
+    </div>
+</div>

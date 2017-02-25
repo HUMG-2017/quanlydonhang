@@ -14,6 +14,10 @@ var MyApp = angular
     'ui.bootstrap',
     'angular-loading-bar',
     'angular-jwt',
+    //'bw.paging',
+    //'tagged.directives.infiniteScroll',
+    'ui.utils.masks',
+    'datetime',
   ]);
 
 /*custom respone*/
@@ -86,7 +90,8 @@ MyApp.config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', fun
                       'App/scripts/directives/header/header.js',
                       'App/scripts/directives/header/header-notification/header-notification.js',
                       'App/scripts/directives/sidebar/sidebar.js',
-                      'App/scripts/directives/sidebar/sidebar-search/sidebar-search.js'
+                      'App/scripts/directives/sidebar/sidebar-search/sidebar-search.js',
+                      'App/scripts/directives/filter/filter.js'
                       ]
                   }),
                   $ocLazyLoad.load(
@@ -216,6 +221,21 @@ MyApp.config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', fun
           templateUrl: 'App/views/ui-elements/grid.html',
           url: '/grid'
       })
+
+    .state('dashboard.donhang', {
+        templateUrl: 'App/views/donhang/donhang.html',
+        url: '/donhang',
+        controller: 'DonHangCtrl',
+        resolve: {
+            loadMyFile: function ($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                    name: 'qlVanChuyenApp',
+                    files: ['App/scripts/controllers/DonHangCtrl.js']
+                })
+            }
+        }
+    })
+
 }]);
 
 
@@ -226,11 +246,11 @@ MyApp.run(function (jwtHelper, $rootScope, $http, $state, $timeout, $stateParams
     $rootScope.$stateParams = $stateParams;
 
     //$rootScope.$on("$stateChangeSuccess", function (event, toState) {
-        
+
     //$timeout(function () { // Needed to ensure the title is changed *after* the url so that history entries are correct.
     //$window.document.title = toState.name;
     //});
-   // });
+    // });
 
     $rootScope.$on('$stateChangeStart',
             function (e, toState, toParams, fromState, fromParams) {
@@ -240,7 +260,7 @@ MyApp.run(function (jwtHelper, $rootScope, $http, $state, $timeout, $stateParams
                     //dc
                 } else {
                     if (toState.name === "login") {
-                        alert('dang o login');
+                        //alert('dang o login');
                         return;
                     };
 
@@ -272,5 +292,11 @@ MyApp.run(function (jwtHelper, $rootScope, $http, $state, $timeout, $stateParams
         $rootScope.currentUser.TaiKhoan = dataUser.unique_name;
     } catch (err) {
 
-    }
+    };
+
+    $rootScope.Logout = function () {
+        window.localStorage.removeItem('currentUser');
+        $state.go('login');
+    };
+
 });

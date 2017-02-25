@@ -15,6 +15,19 @@ namespace MvcApplication1.Controllers
             return new string[] { "value1", "value2" };
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        public string test()
+        {
+            return "AAAAA";
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public string test2([FromBody]string value)
+        {
+            return "BBBB";
+        }
         // GET api/<controller>/5
         public string Get(int id)
         {

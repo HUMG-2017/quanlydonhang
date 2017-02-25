@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="App/bower_components/metisMenu/dist/metisMenu.min.css">
     <link rel="stylesheet" href="App/bower_components/angular-loading-bar/build/loading-bar.min.css">
     <link rel="stylesheet" href="App/bower_components/font-awesome/css/font-awesome.min.css" type="text/css">
-    <!-- endbuild -->
+   <!-- endbuild -->
     
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -37,6 +37,13 @@
     <script src="App/bower_components/metisMenu/dist/metisMenu.min.js"></script>
     <script src="App/bower_components/Chart.js/Chart.min.js"></script>
     <script src="App/bower_components/angular-jwt/dist/angular-jwt.min.js"></script>
+    <%--<script src="App/bower_components/angular-paging/paging.min.js"></script>--%>
+    <%--<script src="App/bower_components/angular-scroll/taggedInfiniteScroll.js"></script>--%>
+    <script src="App/js/vi_vn.js"></script>
+  
+    <script src="App/bower_components/angular-input-masks/angular-input-masks-standalone.min.js"></script>
+    <script src="App/bower_components/custom-input/dist/custom-input.js"></script>
+    <script src="App/bower_components/angular-datetime-input/dist/datetime.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     

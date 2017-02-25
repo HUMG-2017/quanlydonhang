@@ -1,0 +1,104 @@
+﻿<div class="chat-panel panel panel-default">
+    <div class="panel-heading">
+        <i class="fa fa fa-cart-plus fa-fw"></i>
+        Tạo Lô Hàng
+        <div class="btn-group pull-right">
+            <button id="boxLoHang" ng-click="showHideBox($event)" data-show="true" type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-chevron-{{direct}}"></i>
+            </button>
+        </div>
+    </div>
+    <!-- /.panel-heading -->
+    <div class="panel-body" ng-show="showBox">
+        <ul class="chat">
+            <li class="left clearfix">
+                <span class="chat-img pull-left">
+                    <select id="select-kho" class="form-control ">
+                        <option value="two">Hà nội</option>
+                        <option value="three">Lào Cai</option>
+                    </select>
+                </span>
+                <div class="chat-body clearfix">
+                    <div class="header">
+                        <p><strong class="primary-font">MH-1111</strong></p>
+                    </div>
+                    <p>
+                        San pham: Iphone 7
+                    </p>
+                    <p>
+                        Mau: den
+                    </p>
+                </div>
+            </li>
+            <li class="right clearfix">
+                <span class="chat-img pull-right">
+                    <select id="select-kho" class="form-control ">
+                        <option value="two">Hà nội</option>
+                        <option value="three">Lào Cai</option>
+                    </select>
+                </span>
+                <div class="chat-body clearfix">
+                    <div class="header">
+                        <p><strong class="primary-font">MH-1111</strong></p>
+                    </div>
+                    <p>
+                        San pham: Máy hút bụi
+                    </p>
+                    <p>
+                        Mau: den
+                    </p>
+                </div>
+            </li>
+            <li class="left clearfix">
+                <span class="chat-img pull-left">
+                    <select id="select-kho" class="form-control ">
+                        <option value="two">Hà nội</option>
+                        <option value="three">Lào Cai</option>
+                    </select>
+                </span>
+                <div class="chat-body clearfix">
+                    <div class="header">
+                        <p><strong class="primary-font">MH-1111</strong></p>
+                    </div>
+                    <p>
+                        San pham: 1
+                    </p>
+                    <p>
+                        Mau: den
+                    </p>
+                </div>
+            </li>
+            <li class="right clearfix">
+                <span class="chat-img pull-right">
+                    <select id="select-kho" class="form-control ">
+                        <option value="two">Hà nội</option>
+                        <option value="three">Lào Cai</option>
+                    </select>
+                </span>
+                <div class="chat-body clearfix">
+                    <div class="header">
+                        <p><strong class="primary-font">MH-1111</strong></p>
+                    </div>
+                    <p>
+                        San pham: 1
+                    </p>
+                    <p>
+                        Mau: den
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- /.panel-body -->
+    <div class="panel-footer" ng-show="showBox">
+        <div class="input-group">
+            <input name="field" ng-model="gialobien" ui-money-mask="0" id="btn-input" type="text" class="form-control input-sm" placeholder="Nhập giá cước lô biên">
+            <span class="input-group-btn">
+                <button class="btn btn-warning btn-sm" id="btn-chat">
+                    Tạo
+                </button>
+            </span>
+        </div>
+    </div>
+    <!-- /.panel-footer -->
+</div>
