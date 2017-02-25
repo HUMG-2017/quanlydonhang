@@ -41,9 +41,11 @@
     <%--<script src="App/bower_components/angular-scroll/taggedInfiniteScroll.js"></script>--%>
     <script src="App/js/vi_vn.js"></script>
   
-    <script src="App/bower_components/angular-input-masks/angular-input-masks-standalone.min.js"></script>
+    <script src="App/bower_components/angular-input-masks/angular-input-masks-standalone.js"></script>
+
+    <script src="App/bower_components/angular-datetime-input/polyfill.js"></script>
     <script src="App/bower_components/custom-input/dist/custom-input.js"></script>
-    <script src="App/bower_components/angular-datetime-input/dist/datetime.js"></script>
+    <script src="App/bower_components/angular-datetime-input/datetime.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     

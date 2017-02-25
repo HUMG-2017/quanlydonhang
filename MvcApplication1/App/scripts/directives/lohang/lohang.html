@@ -10,9 +10,10 @@
     </div>
     <!-- /.panel-heading -->
     <div class="panel-body" ng-show="showBox">
+        <div ng-show="LoHang.length==0"><p><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;<b>Tích chọn đơn hàng bên phải để thêm vào lô hàng mới!</b></p></div>
         <ul class="chat">
-            <li class="left clearfix">
-                <span class="chat-img pull-left">
+            <li ng-class="{left:$index%2==0,right:$index%2==1}" class="clearfix" ng-repeat="item in LoHang">
+                <span ng-class="{'pull-left':$index%2==0,'pull-right':$index%2==1}" class="chat-img">
                     <select id="select-kho" class="form-control ">
                         <option value="two">Hà nội</option>
                         <option value="three">Lào Cai</option>
@@ -20,7 +21,7 @@
                 </span>
                 <div class="chat-body clearfix">
                     <div class="header">
-                        <p><strong class="primary-font">MH-1111</strong></p>
+                        <p><strong class="primary-font">{{item.TenHang}}</strong></p>
                     </div>
                     <p>
                         San pham: Iphone 7
@@ -30,7 +31,7 @@
                     </p>
                 </div>
             </li>
-            <li class="right clearfix">
+            <!--<li class="right clearfix">
                 <span class="chat-img pull-right">
                     <select id="select-kho" class="form-control ">
                         <option value="two">Hà nội</option>
@@ -48,45 +49,8 @@
                         Mau: den
                     </p>
                 </div>
-            </li>
-            <li class="left clearfix">
-                <span class="chat-img pull-left">
-                    <select id="select-kho" class="form-control ">
-                        <option value="two">Hà nội</option>
-                        <option value="three">Lào Cai</option>
-                    </select>
-                </span>
-                <div class="chat-body clearfix">
-                    <div class="header">
-                        <p><strong class="primary-font">MH-1111</strong></p>
-                    </div>
-                    <p>
-                        San pham: 1
-                    </p>
-                    <p>
-                        Mau: den
-                    </p>
-                </div>
-            </li>
-            <li class="right clearfix">
-                <span class="chat-img pull-right">
-                    <select id="select-kho" class="form-control ">
-                        <option value="two">Hà nội</option>
-                        <option value="three">Lào Cai</option>
-                    </select>
-                </span>
-                <div class="chat-body clearfix">
-                    <div class="header">
-                        <p><strong class="primary-font">MH-1111</strong></p>
-                    </div>
-                    <p>
-                        San pham: 1
-                    </p>
-                    <p>
-                        Mau: den
-                    </p>
-                </div>
-            </li>
+            </li>-->
+           
         </ul>
     </div>
     <!-- /.panel-body -->

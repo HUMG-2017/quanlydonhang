@@ -277,22 +277,23 @@ MyApp.run(function (jwtHelper, $rootScope, $http, $state, $timeout, $stateParams
                         window.location.href = "http://localhost:1108/Default.aspx#/login";
                         return;
                     }
+
+                    //Get user
+                    try {
+                        $rootScope.currentUser = {};
+                        var dataUser = localStorage.getItem("currentUser");
+                        dataUser = JSON.parse(dataUser);
+                        $rootScope.currentUser.Role = dataUser.role;
+                        $rootScope.currentUser.Id = dataUser.nameid;
+                        $rootScope.currentUser.TaiKhoan = dataUser.unique_name;
+                        console.log(JSON.stringify($rootScope.currentUser));
+                    } catch (err) {
+
+                    };
+
                 }
 
             });
-
-
-
-    //Get user
-    $rootScope.currentUser = {};
-    try {
-        var dataUser = window.localStorage.getItem("currentUser");
-        $rootScope.currentUser.Role = dataUser.role;
-        $rootScope.currentUser.Id = dataUser.nameid;
-        $rootScope.currentUser.TaiKhoan = dataUser.unique_name;
-    } catch (err) {
-
-    };
 
     $rootScope.Logout = function () {
         window.localStorage.removeItem('currentUser');

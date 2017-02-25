@@ -10,7 +10,7 @@ MyApp
 .controller('LoginController', function ($scope, $timeout, $rootScope, jwtHelper,UserService,$state) {
     $scope.$on('$viewContentLoaded', function ()  {
      
-    $rootScope.currentUser = {};
+    //$rootScope.currentUser = {};
     //$rootScope.currentUser.TaiKhoan = "admin";
         //$rootScope.currentUser.MatKhau = "admin";
 
@@ -35,6 +35,7 @@ MyApp
             var dataUser = jwtHelper.decodeToken(data);
 
             window.localStorage.setItem('currentUser', JSON.stringify(dataUser));
+
             $state.go("dashboard.home");
 
         }, function (err) {

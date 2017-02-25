@@ -124,6 +124,9 @@ background-color: #eee;
 
 
 /*Don hang*/
+.role-0 .card-don-hang .wrapper-button>a button{
+    margin-bottom:5px;
+}
 
 .card-don-hang .li-0{
     background-color:#eee;
@@ -151,6 +154,10 @@ background-color: #eee;
 
 .card-don-hang .right-content{
     text-align:right;
+}
+
+.card-don-hang .left-content{
+    text-align:left;
 }
 
 .no-padding-right{
