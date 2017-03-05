@@ -23,7 +23,7 @@ namespace MvcApplication1
             claims.Add(new Claim(ClaimTypes.Name, username));
             //Test theme role trong jwt
             claims.Add(new Claim(ClaimTypes.Role,  HttpContext.Current.Session["Role"].ToString()));
-            claims.Add(new Claim(ClaimTypes.NameIdentifier, HttpContext.Current.Session["Id"].ToString() ));
+            claims.Add(new Claim(ClaimTypes.GroupSid, HttpContext.Current.Session["IdStore"].ToString()));
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

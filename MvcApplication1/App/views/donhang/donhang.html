@@ -5,18 +5,18 @@
     </div>
     <!-- /.col-lg-12 -->
 </div>
+
 <div class="row">
     <div class="col-lg-3">
-        <select id="select-kho" class="form-control">
-            <option selected value="all">Tất cả các kho</option>
-            <option value="two">Kho hàng cấp 1</option>
-            <option value="three">Kho hàng cấp 2</option>
+        <select ng-change="chonKhoHang(filterDH.khoHangNhan)" id="select-kho" ng-model="filterDH.khoHangNhan" class="form-control">
+            <option selected value="">Tất cả các kho</option>
+            <option ng-repeat="khohang in DSKhoHang" value="{{khohang.id}}">{{khohang.tenKho}}</option>
         </select>
     </div>
     <!--Loc theo ma don hang-->
     <div class="col-lg-6 col-lg-push-3">
         <div class="input-group filter-table">
-            <input type="text" class="form-control" name="x" placeholder="Nhập mã đơn hàng...">
+            <input type="text" class="form-control" ng-model="filterDH.$" name="x" placeholder="Nhập mã đơn hàng...">
             <span class="input-group-btn">
                 <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span> Tìm kiếm</button>
             </span>
@@ -26,40 +26,43 @@
     <!-- /.col-lg-12 -->
     <!--Danh sách role 0-->
     <div ng-show="currentUser.Role==0" class="col-lg-12 role-0">
+        <div ng-show="ListDonHangRole0.length==0"><button class ="btn btn-success" data-toggle="modal" data-target="#themmoirole0"><i class="fa fa-plus" aria-hidden="true"></i> Thêm mới đơn hàng</button></div>
         <div class="card card-don-hang">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item li-{{$index%2}}" ng-repeat="donhang in ListDonHangRole0 track by $index">
+                <li class="list-group-item li-{{$index%2}}" ng-repeat="donhang in ListDonHangRole0 | filter:filterDH ">
                     <div class="row">
                         <div class="col-lg-1 no-padding-lr text-center wrapper-input">
-                            <input type="checkbox" class="">
+                            <!--<input type="checkbox" class="">-->
                         </div>
                         <div class="col-lg-3 no-padding-lr">
-                            <p><span>Tên hàng: </span><span>{{donhang.TenHang}}</span></p>
-                            <p><span>Tên khách: </span><span>{{donhang.TenKhach}}</span></p>
-                            <p><span>Giá sản phẩm: </span><span>{{donhang.GiaSP}}</span></p>
-                            <p><span>Đặt cọc: </span><span>{{donhang.DatCoc}}</span></p>
-                            <p><span>Giá cần thu: </span>{{donhang.GiaSPCanThu}}<span></span></p>
+                            <p><span>Tên hàng: </span><span>{{donhang.tenHang||'---'}}</span></p>
+                            <p><span>Tên khách: </span><span>{{donhang.tenKhach||'---'}}</span></p>
+                            <p><span>Điện thoại: </span><span>{{donhang.soDienThoai||'---'}}</span></p>
+                            <p><span>Ngày đặt hàng: </span>{{donhang.ngayDatHang|date:"dd/MM/yyyy":"+0007"||'---'}}<span></span></p>
+                            <p><span>Giá sản phẩm: </span><span>{{donhang.giaSP|nfcurrency }} VNĐ</span></p>
+                            <p><span>Đặt cọc: </span><span>{{donhang.datCoc|nfcurrency }} VNĐ</span></p>
+                            <p><span>Giá cần thu: </span>{{donhang.giaSPCanThu|nfcurrency }} VNĐ<span></span></p>
                         </div>
                         <div class="col-lg-3 no-padding-right">
-                            <p><span>Cân nặng: </span><span></span></p>
-                            <p><span>Thể tích: </span><span></span></p>
-                            <p><span>Cước vận chuyển: </span><span></span></p>
-                            <p><span>Hãng vận chuyển: </span><span></span></p>
-                            <p><span>Mã vận chuyển: </span><span></span></p>
-                            <p><span>Trạng thái đơn hàng: </span><span></span></p>
+                            <p><span>Cân nặng: </span><span>{{donhang.canNang||'---'}}</span></p>
+                            <p><span>Thể tích: </span><span>{{donhang.theTich||'---'}}</span></p>
+                            <p><span>Cước vận chuyển: </span><span>{{donhang.cuocVanChuyen||'---'}}</span></p>
+                            <p><span>Hãng vận chuyển: </span><span>{{donhang.hangVanChuyen||'---'}}</span></p>
+                            <p><span>Mã vận chuyển: </span><span>{{donhang.maVanChuyen||'---'}}</span></p>
+                            <p><span>Trạng thái đơn hàng: </span><span>{{donhang.trangThaiDonHang||'---'}}</span></p>
                         </div>
                         <div class="col-lg-3 no-padding-right">
-                            <p><span>Cân nặng: </span><span></span></p>
-                            <p><span>Thể tích: </span><span></span></p>
-                            <p><span>Cước vận chuyển: </span><span></span></p>
-                            <p><span>Hãng vận chuyển: </span><span></span></p>
-                            <p><span>Mã vận chuyển: </span><span></span></p>
-                            <p><span>Trạng thái đơn hàng: </span><span></span></p>
+                            <p><span>Kho hàng nhận: </span><span>{{donhang.khoHangNhan||'---'}}</span></p>
+                            <p><span>Chuyển phát: </span><span>{{donhang.chuyenPhat||'---'}}</span></p>
+                            <p><span>Người nhận cuối: </span><span>{{donhang.nguoiNhanCuoi||'---'}}</span></p>
+                            <p><span>Kho hàng cuối: </span><span>{{donhang.khoHangCuoi||'---'}}</span></p>
+                            <p><span>Mã vận chuyển: </span><span>{{donhang.maVanChuyen||'---'}}</span></p>
+                            <p><span>OrderNumber: </span><span>{{donhang.orderNumber||'---'}}</span></p>
                         </div>
                         <div class="col-lg-1 no-padding-right left-content wrapper-button">
                             <a data-placement="top" data-toggle="tooltip" title="Thêm mới đơn hàng"><button class="btn btn-success btn-xs" data-toggle="modal" data-target="#themmoirole0"><i class="fa fa-plus" aria-hidden="true"></i> Thêm</button></a>
-                            <a data-placement="top" data-toggle="tooltip" title="Sửa đơn hàng"><button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#suarole0"><i class="glyphicon glyphicon-pencil"></i> Sửa</button></a>
-                            <a data-placement="top" data-toggle="tooltip" title="Xóa đơn hàng"><button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#xoarole0"><i class="glyphicon glyphicon-trash"></i> Xóa</button></a>
+                            <a data-placement="top" data-toggle="tooltip" title="Sửa đơn hàng"><button ng-click="ChonDonHangSua(donhang)" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#suarole0"><i class="glyphicon glyphicon-pencil"></i> Sửa</button></a>
+                            <a data-placement="top" data-toggle="tooltip" title="Xóa đơn hàng"><button ng-click="SetIdDonHangCanXoa(donhang.id)" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#xoarole0"><i class="glyphicon glyphicon-trash"></i> Xóa</button></a>
                         </div>
                     </div>
                 </li>
@@ -69,22 +72,23 @@
     </div>
     <!--Danh sách role 1-->
     <div ng-show="currentUser.Role==1" class="col-lg-12 role-1">
+        <p ng-show="ListDonHangRole1.length==0">Không có đơn hàng</p>
         <div class="card card-don-hang">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item li-{{$index%2}}" ng-repeat="donhang in ListDonHangRole1">
+                <li class="list-group-item li-{{$index%2}}" ng-repeat="donhang in ListDonHangRole1 | filter:filterDH">
                     <div class="row">
                         <div class="col-lg-1 no-padding-lr text-center wrapper-input">
                             <input ng-click="addDonHangVaoLoHang(donhang)" ng-model="donhang.select" type="checkbox" class="">
                         </div>
                         <div class="col-lg-5 no-padding-lr">
-                            <p><span>Tên hàng: </span><span>{{donhang.TenHang}}</span></p>
-                            <p><span>Tên khách: </span><span>{{donhang.TenKhach}}</span></p>
-                            <p><span>Nơi mua hàng: </span><span>{{donhang.TenKhach}}</span></p>
+                            <p><span>Tên hàng: </span><span>{{donhang.tenHang||'---'}}</span></p>
+                            <p><span>Tên khách: </span><span>{{donhang.tenKhach}}</span></p>
+                            <p><span>Nơi mua hàng: </span><span>{{donhang.linkSP}}</span></p>
                         </div>
                         <div class="col-lg-6 no-padding-right">
-                            <p><span>Hãng vận chuyển: </span><span></span></p>
-                            <p><span>Mã vận chuyển: </span><span></span></p>
-                            <p><span>Ngày đặt hàng: </span><span></span></p>
+                            <p><span>Kho hàng nhận: </span><span>{{donhang.khoHangNhan||'---'}}</span></p>
+                            <p><span>Mã vận chuyển: </span><span>{{donhang.maVanChuyen||'---'}}</span></p>
+                            <p><span>Ngày đặt hàng: </span><span>{{donhang.ngayDatHang | date : 'dd/MM/yyyy' : '+0007'||'---'}}</span></p>
                         </div>
                     </div>
                 </li>
@@ -95,22 +99,39 @@
 
     <!--Danh sách role 2-->
     <div ng-show="currentUser.Role==2" class="col-lg-12 role-2">
+        <p ng-show="ListDonHangRole2.length==0">Không có đơn hàng</p>
         <div class="card card-don-hang">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item li-{{$index%2}}" ng-repeat="donhang in ListDonHangRole2">
+                <li class="list-group-item li-{{$index%2}}" ng-repeat="donhang in ListDonHangRole2| filter:filterDH">
                     <div class="row">
-                        <div class="col-lg-5 ">
-                            <p><span>Tên hàng: </span><span>{{donhang.TenHang}}</span></p>
-                            <p><span>Tên khách: </span><span>{{donhang.TenKhach}}</span></p>
-                            <p><span>Nơi mua hàng: </span><span>{{donhang.TenKhach}}</span></p>
+                        <div class="col-lg-1 no-padding-lr text-center wrapper-input">
+                            <!--<input type="checkbox" class="">-->
                         </div>
-                        <div class="col-lg-6 ">
-                            <p><span>Hãng vận chuyển: </span><span></span></p>
-                            <p><span>Mã vận chuyển: </span><span></span></p>
-                            <p><span>Ngày đặt hàng: </span><span></span></p>
+                        <div class="col-lg-3 no-padding-lr">
+                            <p><span>Tên hàng: </span><span>{{donhang.tenHang||'---'}}</span></p>
+                            <p><span>Tên khách: </span><span>{{donhang.tenKhach||'---'}}</span></p>
+                            <p><span>Điện thoại: </span><span>{{donhang.soDienThoai||'---'}}</span></p>
+                            <p><span>Giá cần thu: </span>{{donhang.giaSPCanThu|nfcurrency}} VNĐ<span></span></p>
+                            <p><span>Ngày đặt hàng: </span>{{donhang.ngayDatHang|date:"dd/MM/yyyy":"+0007"||'---'}}<span></span></p>
+                            <p><span>Cân nặng: </span><span>{{donhang.canNang||'---'}}</span></p>
+                            <p><span>Thể tích: </span><span>{{donhang.theTich||'---'}}</span></p>
+                        </div>
+                        <div class="col-lg-3 no-padding-right">
+                            <p><span>Cước vận chuyển: </span><span>{{donhang.cuocVanChuyen||'---'}}</span></p>
+                            <p><span>Hãng vận chuyển: </span><span>{{donhang.hangVanChuyen||'---'}}</span></p>
+                            <p><span>Mã vận chuyển: </span><span>{{donhang.maVanChuyen||'---'}}</span></p>
+                            <p><span>Trạng thái đơn hàng: </span><span>{{donhang.trangThaiDonHang||'---'}}</span></p>
+                            <p><span>Kho hàng nhận: </span><span>{{donhang.khoHangNhan||'---'}}</span></p>
+                        </div>
+                        <div class="col-lg-3 no-padding-right">
+                            <p><span>Chuyển phát: </span><span>{{donhang.chuyenPhat||'---'}}</span></p>
+                            <p><span>Người nhận cuối: </span><span>{{donhang.nguoiNhanCuoi||'---'}}</span></p>
+                            <p><span>Kho hàng cuối: </span><span>{{donhang.khoHangCuoi||'---'}}</span></p>
+                            <p><span>Mã vận chuyển: </span><span>{{donhang.maVanChuyen||'---'}}</span></p>
+                            <p><span>OrderNumber: </span><span>{{donhang.orderNumber||'---'}}</span></p>
                         </div>
                         <div class="col-lg-1">
-                            <a data-placement="top" data-toggle="tooltip" title="Xử lý"><button class="btn btn-success btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><i class="fa fa-refresh" aria-hidden="true"></i> Xử lý</button></a>
+                            <a data-placement="top" data-toggle="tooltip" title="Xử lý"><button ng-click="ChonDonHang(donhang)" class="btn btn-success btn-xs" data-title="Xử lý" data-toggle="modal" data-target="#xulyrole2"><i class="fa fa-refresh" aria-hidden="true"></i> Xử lý</button></a>
                         </div>
                     </div>
                 </li>
@@ -147,93 +168,63 @@
                     <div class="row">
                         <div class="form-group col-lg-4">
                             <label for="tenkhachhang">Tên khách hàng:</label>
-                            <input ng-model="donhang.TenKhachHang" type="text" class="form-control" id="tenkhachhang" placeholder="Nhập tên khách hàng">
+                            <input ng-model="donhang.tenKhach" type="text" class="form-control" id="tenkhachhang" placeholder="Nhập tên khách hàng">
                         </div>
                         <div class="form-group col-lg-4">
                             <label for="dienthoai">Số điện thoại:</label>
-                            <input type="tel" class="form-control" id="dienthoai" placeholder="Nhập số điện thoại" name="field" ng-model="donhang.SoDienThoai">
+                            <input type="tel" class="form-control" id="dienthoai" placeholder="Nhập số điện thoại" name="field" ng-model="donhang.soDienThoai">
                         </div>
                         <div class="form-group col-lg-4">
-                            <label for="tensanpham">Tên sản phẩm:</label>
-                            <input type="text" class="form-control" id="tensanpham" placeholder="Nhập tên sản phẩm" ng-model="donhang.TenSP">
+                            <label for="tensanpham">Tên hàng:</label>
+                            <input type="text" class="form-control" id="tensanpham" placeholder="Nhập tên sản phẩm" ng-model="donhang.tenHang">
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-lg-4">
                             <label for="soluong">Số lượng:</label>
-                            <input type="number" class="form-control" id="soluong" placeholder="Nhập số lượng" ng-model="donhang.SoLuong">
+                            <input type="number" class="form-control" id="soluong" placeholder="Nhập số lượng" ng-model="donhang.soLuong">
                         </div>
                         <div class="form-group col-lg-4">
                             <label for="giasanpham">Giá sản phẩm:</label>
-                            <input ng-change="TinhGiaSPCanThu()" type="text" class="form-control" id="giasanpham" placeholder="Nhập giá sản phẩm" name="field" ng-model="donhang.GiaSP" ui-money-mask="0">
+                            <input ng-change="TinhGiaSPCanThu()" type="text" class="form-control" id="giasanpham" placeholder="Nhập giá sản phẩm" name="field" ng-model="donhang.giaSP" ui-money-mask="0">
                         </div>
                         <div class="form-group col-lg-4">
                             <label for="datcoc">Đặt cọc :</label>
-                            <input ng-change="TinhGiaSPCanThu()" type="text" class="form-control" id="datcoc" placeholder="Nhập tiền đặt cọc" name="field" ng-model="donhang.DatCoc" ui-money-mask="0">
+                            <input ng-change="TinhGiaSPCanThu()" type="text" class="form-control" id="datcoc" placeholder="Nhập tiền đặt cọc" name="field" ng-model="donhang.datCoc" ui-money-mask="0">
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-lg-4">
                             <label for="giacanthu">Giá sản phẩm cần thu :</label>
-                            <input ng-disabled="true" type="text" class="form-control" id="giacanthu" placeholder="Số tiền cần thu" name="field" ng-model="donhang.GiaSPCanThu" ui-money-mask="0">
+                            <input ng-disabled="true" type="text" class="form-control" id="giacanthu" placeholder="Số tiền cần thu" name="field" ng-model="donhang.giaSPCanThu" ui-money-mask="0">
                         </div>
                         <div class="form-group col-lg-4">
                             <label for="ghichu">Ghi chú: </label>
-                            <input type="text" class="form-control" ng-model="donhang.GhiChu" id="ghichu" placeholder="Nhập ghi chú cho sản phẩm">
+                            <input type="text" class="form-control" ng-model="donhang.ghiChu" id="ghichu" placeholder="Nhập ghi chú cho sản phẩm">
                         </div>
-                        <div class="form-group col-lg-4">
-                            <label for="cannang">Cân nặng:</label>
-                            <input id="cannang" type="text" class="form-control" ng-model="donhang.CanNang" placeholder="Nhập cân nặng" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-lg-4">
-                            <label for="thetich">Thể tích :</label>
-                            <input type="text" class="form-control" id="thetich" placeholder="Nhập thể tích" name="field" ng-model="donhang.TheTich" ui-money-mask="0">
-                        </div>
-                        <div class="form-group col-lg-4">
-                            <label for="cuocvanchuyen">Cước vận chuyển: </label>
-                            <input type="number" class="form-control" ng-model="donhang.CuocVanChuyen" id="cuocvanchuyen" placeholder="Nhập cước vận chuyển" ng-model="donhang.CuocVanChuyen">
-                        </div>
-                        <div class="form-group col-lg-4">
-                            <label for="hangvc">Hãng vận chuyển:</label>
-                            <input id="hangvc" type="text" class="form-control" ng-model="donhang.HangVanChuyen" placeholder="Nhập hãng vận chuyển" />
-                        </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-lg-4">
                             <label for="mavc">Mã vận chuyển :</label>
-                            <input type="text" class="form-control" id="mavc" placeholder="Nhập mã vận chuyển" name="field" ng-model="donhang.MaVanChuyen" ui-money-mask="0">
-                        </div>
-                        <div class="form-group col-lg-4">
-                            <label for="khonhan">Kho hàng nhận: </label>
-                            <input type="text" class="form-control" ng-model="donhang.KhoHangNhan" id="khonhan" placeholder="Nhập kho nhận">
-                        </div>
-                        <div class="form-group col-lg-4">
-                            <label for="chuyenphat">Chuyển phát:</label>
-                            <input id="chuyenphat" type="text" class="form-control" placeholder="Nhập chuyển phát" ng-model="donhang.ChuyenPhat" />
+                            <input type="text" class="form-control" id="mavc" placeholder="Nhập mã vận chuyển" name="field" ng-model="donhangsua.maVanChuyen">
                         </div>
                     </div>
+                    
                     <div class="row">
                         <div class="form-group col-lg-4">
-                            <label for="nguoinhancuoi">Người nhận cuối :</label>
-                            <input type="text" class="form-control" id="nguoinhancuoi" placeholder="Nhập người nhận cuối" name="field" ng-model="donhang.NguoiNhanCuoi" ui-money-mask="0">
-                        </div>
-                        <div class="form-group col-lg-4">
-                            <label for="khohangcuoi">Kho hàng cuối: </label>
-                            <input type="text" class="form-control" ng-model="donhang.KhoHangCuoi" id="khohangcuoi" placeholder="Nhập kho hàng cuối">
+                            <label for="khonhan">Kho hàng nhận: </label>
+                            <select id="khonhan" class="form-control" ng-model="donhang.khoHangNhan">
+                                <option value="" disabled>Chọn kho hàng nhận</option>
+                                <option ng-repeat="option in DSKhoHang" value="{{option.id}}">{{option.tenKho}}</option>
+                            </select>
                         </div>
                         <div class="form-group col-lg-4">
                             <label for="ngaydathang">Ngày đặt hàng:</label>
-                            <input id="ngaydathang" type="text" class="form-control" datetime="dd/MM/yyyy" ng-model="donhang.NgayDatHang" />
+                            <input id="ngaydathang" type="text" class="form-control" datetime="dd/MM/yyyy" ng-model="donhang.ngayDatHang" />
                         </div>
                     </div>
-                    <div class="row">
 
-                    </div>
                 </div>
                 <div class="modal-footer ">
-                    <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Đồng ý</button>
+                    <button type="button" class="btn btn-success" ng-click="ThemMoiDonHang()"><span class="glyphicon glyphicon-ok-sign"></span> Đồng ý</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Hủy bỏ</button>
                 </div>
             </div>
@@ -248,24 +239,104 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                    <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
+                    <h4 class="modal-title custom_align" id="Heading">Sửa đơn hàng</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <input class="form-control " type="text" placeholder="Mohsin">
+                    <div class="row">
+                        <div class="form-group col-lg-4">
+                            <label for="tenkhachhang">Tên khách hàng:</label>
+                            <input ng-model="donhangsua.tenKhach" type="text" class="form-control" id="tenkhachhang" placeholder="Nhập tên khách hàng">
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="dienthoai">Số điện thoại:</label>
+                            <input type="tel" class="form-control" id="dienthoai" placeholder="Nhập số điện thoại" name="field" ng-model="donhangsua.soDienThoai">
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="tensanpham">Tên hàng:</label>
+                            <input type="text" class="form-control" id="tensanpham" placeholder="Nhập tên sản phẩm" ng-model="donhangsua.tenHang">
+                        </div>
                     </div>
-                    <div class="form-group">
-
-                        <input class="form-control " type="text" placeholder="Irshad">
+                    <div class="row">
+                        <div class="form-group col-lg-4">
+                            <label for="soluong">Số lượng:</label>
+                            <input type="number" class="form-control" id="soluong" placeholder="Nhập số lượng" ng-model="donhangsua.soLuong">
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="giasanpham">Giá sản phẩm:</label>
+                            <input ng-change="TinhGiaSPCanThu()" type="text" class="form-control" id="giasanpham" placeholder="Nhập giá sản phẩm" name="field" ng-model="donhangsua.giaSP" ui-money-mask="0">
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="datcoc">Đặt cọc :</label>
+                            <input ng-change="TinhGiaSPCanThu2()" type="text" class="form-control" id="datcoc" placeholder="Nhập tiền đặt cọc" name="field" ng-model="donhangsua.datCoc" ui-money-mask="0">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <textarea rows="2" class="form-control" placeholder="CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan"></textarea>
+                    <div class="row">
+                        <div class="form-group col-lg-4">
+                            <label for="giacanthu">Giá sản phẩm cần thu :</label>
+                            <input ng-disabled="true" type="text" class="form-control" id="giacanthu" placeholder="Số tiền cần thu" name="field" ng-model="donhangsua.giaSPCanThu" ui-money-mask="0">
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="ghichu">Ghi chú: </label>
+                            <input type="text" class="form-control" ng-model="donhangsua.ghiChu" id="ghichu" placeholder="Nhập ghi chú cho sản phẩm">
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="mavc">Mã vận chuyển :</label>
+                            <input type="text" class="form-control" id="mavc" placeholder="Nhập mã vận chuyển" name="field" ng-model="donhangsua.maVanChuyen">
+                        </div>
+                    </div>
 
+                    <div class="row">
+                        <div class="form-group col-lg-4">
+                            <label for="khonhan">Kho hàng nhận:</label>
+                            <select id="khonhan" class="form-control" ng-model="donhangsua.khoHangNhan">
+                                <option value="" disabled>Chọn kho hàng nhận</option>
+                                <option ng-repeat="option in DSKhoHang" value="{{option.id}}">{{option.tenKho}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="ngaydathang">Ngày đặt hàng:</label>
+                            <input id="ngaydathang" type="text" class="form-control" datetime="dd/MM/yyyy" ng-model="donhangsua.ngayDatHang" />
+                        </div>
+                    </div>
 
+                    <div class="row hide">
+                        <div class="form-group col-lg-4">
+                            <label for="thetich">Thể tích :</label>
+                            <input type="text" class="form-control" id="thetich" placeholder="Nhập thể tích" name="field" ng-model="donhangsua.theTich" ui-money-mask="0">
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="cuocvanchuyen">Cước vận chuyển: </label>
+                            <input type="text" class="form-control" id="cuocvanchuyen" placeholder="Nhập cước vận chuyển" ng-model="donhangsua.cuocVanChuyen" ui-money-mask="0">
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="hangvc">Hãng vận chuyển:</label>
+                            <input id="hangvc" type="text" class="form-control" ng-model="donhangsua.hangVanChuyen" placeholder="Nhập hãng vận chuyển" />
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="cannang">Cân nặng:</label>
+                            <input id="cannang" type="text" class="form-control" ng-model="donhangsua.canNang" placeholder="Nhập cân nặng" />
+                        </div>
+                    </div>
+                    <div class="row hide">
+                        <div class="form-group col-lg-4">
+                            <label for="chuyenphat">Chuyển phát:</label>
+                            <input id="chuyenphat" type="text" class="form-control" placeholder="Nhập chuyển phát" ng-model="donhangsua.chuyenPhat" />
+                        </div>
+                    </div>
+                    <div class="row hide">
+                        <div class="form-group col-lg-4">
+                            <label for="nguoinhancuoi">Người nhận cuối :</label>
+                            <input type="text" class="form-control" id="nguoinhancuoi" placeholder="Nhập người nhận cuối" name="field" ng-model="donhangsua.nguoiNhanCuoi" ui-money-mask="0">
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="khohangcuoi">Kho hàng cuối: </label>
+                            <input type="text" class="form-control" ng-model="donhangsua.khoHangCuoi" id="khohangcuoi" placeholder="Nhập kho hàng cuối">
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer ">
-                    <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                    <button type="button" class="btn btn-success" ng-click="CapNhatDonHang()"><span class="glyphicon glyphicon-ok-sign"></span> Cập nhật</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Hủy bỏ</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -287,7 +358,7 @@
 
                 </div>
                 <div class="modal-footer ">
-                    <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Đồng ý</button>
+                    <button ng-click="DongYXoaDonHang()" type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Đồng ý</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Hủy bỏ</button>
                 </div>
             </div>
@@ -297,12 +368,115 @@
 
     </div>
 
+    <!--Model xu ly don hang role 2-->
+    <div ng-show="currentUser.Role==2" class="modal modal-lg fade" id="xulyrole2" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                    <h4 class="modal-title custom_align" id="Heading">Thêm mới đơn hàng</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-group col-lg-4">
+                            <label for="tenkhachhang">Tên khách hàng:</label>
+                            <input ng-model="donhang.tenKhach" type="text" class="form-control" id="tenkhachhang" placeholder="Nhập tên khách hàng">
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="dienthoai">Số điện thoại:</label>
+                            <input type="tel" class="form-control" id="dienthoai" placeholder="Nhập số điện thoại" name="field" ng-model="donhang.soDienThoai">
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="tensanpham">Tên hàng:</label>
+                            <input type="text" class="form-control" id="tensanpham" placeholder="Nhập tên sản phẩm" ng-model="donhang.tenHang">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-4">
+                            <label for="soluong">Số lượng:</label>
+                            <input type="number" class="form-control" id="soluong" placeholder="Nhập số lượng" ng-model="donhang.soLuong">
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="giacanthu">Giá sản phẩm cần thu :</label>
+                            <input ng-disabled="true" type="text" class="form-control" id="giacanthu" placeholder="Số tiền cần thu" name="field" ng-model="donhang.giaSPCanThu" ui-money-mask="0">
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="ghichu">Ghi chú: </label>
+                            <input type="text" class="form-control" ng-model="donhang.ghiChu" id="ghichu" placeholder="Nhập ghi chú cho sản phẩm">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-4">
+                            <label for="cannang">Cân nặng:</label>
+                            <input id="cannang" type="text" class="form-control" ng-model="donhang.canNang" placeholder="Nhập cân nặng" />
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="thetich">Thể tích :</label>
+                            <input type="text" class="form-control" id="thetich" placeholder="Nhập thể tích" name="field" ng-model="donhang.theTich" ui-money-mask="0">
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="cuocvanchuyen">Cước vận chuyển: </label>
+                            <input type="text" class="form-control" id="cuocvanchuyen" placeholder="Nhập cước vận chuyển" ng-model="donhang.cuocVanChuyen" ui-money-mask="0">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-4">
+                            <label for="hangvc">Hãng vận chuyển:</label>
+                            <input id="hangvc" type="text" class="form-control" ng-model="donhang.hangVanChuyen" placeholder="Nhập hãng vận chuyển" />
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="mavc">Mã vận chuyển :</label>
+                            <input type="text" class="form-control" id="mavc" placeholder="Nhập mã vận chuyển" name="field" ng-model="donhang.maVanChuyen">
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="khonhan">Kho hàng nhận: </label>
+                            <select id="khonhan" class="form-control" ng-model="donhang.khoHangNhan">
+                                <option value="" disabled>Chọn kho hàng nhận</option>
+                                <option ng-repeat="option in DSKhoHang" value="{{option.id}}">{{option.tenKho}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-4">
+                            <label for="chuyenphat">Chuyển phát:</label>
+                            <input id="chuyenphat" type="text" class="form-control" placeholder="Nhập chuyển phát" ng-model="donhang.chuyenPhat" />
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="ngaydathang">Ngày đặt hàng:</label>
+                            <input id="ngaydathang" type="text" class="form-control" datetime="dd/MM/yyyy" ng-model="donhang.ngayDatHang" />
+                        </div>
+                    </div>
+                    <!--<div class="row">
+                        <div class="form-group col-lg-4">
+                            <label for="nguoinhancuoi">Người nhận cuối :</label>
+                            <input type="text" class="form-control" id="nguoinhancuoi" placeholder="Nhập người nhận cuối" name="field" ng-model="donhang.nguoiNhanCuoi" ui-money-mask="0">
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <label for="khohangcuoi">Kho hàng cuối: </label>
+                            <input type="text" class="form-control" ng-model="donhang.khoHangCuoi" id="khohangcuoi" placeholder="Nhập kho hàng cuối">
+                        </div>
+                    </div>-->
+
+                </div>
+                <div class="modal-footer ">
+                    <button type="button" class="btn btn-success" ng-click="XuLyDonHang()"><span class="glyphicon glyphicon-ok-sign"></span> Đồng ý</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Hủy bỏ</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
 </div>
 
-  <!--Kho cap 1 tao lo hang-->
+<!--Kho cap 1 tao lo hang-->
 <div class="row Lo-Hang" ng-show="currentUser.Role==1">
-  
+
     <div ng-include="'App/scripts/directives/lohang/lohang.html'">
 
     </div>
 </div>
+
+<!--Toast thong bao -->
+<toaster-container toaster-options="{'time-out': 1500}"></toaster-container>

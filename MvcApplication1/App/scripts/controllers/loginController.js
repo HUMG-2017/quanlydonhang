@@ -10,9 +10,9 @@ MyApp
 .controller('LoginController', function ($scope, $timeout, $rootScope, jwtHelper,UserService,$state) {
     $scope.$on('$viewContentLoaded', function ()  {
      
-    //$rootScope.currentUser = {};
+    $rootScope.currentUser = {};
     //$rootScope.currentUser.TaiKhoan = "admin";
-        //$rootScope.currentUser.MatKhau = "admin";
+    //$rootScope.currentUser.MatKhau = "admin";
 
         //ghi nho mat khau
     var remember = localStorage.getItem('user')||null;

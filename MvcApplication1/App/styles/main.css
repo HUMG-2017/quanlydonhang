@@ -191,8 +191,21 @@ background-color: #eee;
     margin-bottom:0 !important;
 }
 
+.Lo-Hang .panel-body{
+    padding:4px;
+}
+
+.Lo-Hang .panel-body ul li{
+    padding:3px;
+}
+
+.Lo-Hang .chat-img{
+    padding-bottom: 5px;
+    display: inline-block;
+}
+
 .Lo-Hang select{
-    width:45px;
+    width:auto !important;
     height:26px;
     padding:4px;
     font-size:12px;
@@ -204,15 +217,19 @@ background-color: #eee;
 }
 
 .Lo-Hang .panel-body .left{
-    background-color:#eee;
+    background-color:#fce3fe;
+}
+
+.Lo-Hang .panel-body .right{
+    background-color:#acd0ee;
 }
 
 .Lo-Hang .chat li.right .chat-body{
-     margin-right: 50px;
+     margin-right: 0;
 }
 
 .Lo-Hang .chat li.left .chat-body{
-     margin-left: 50px;
+     margin-left: 0;
 }
 
 .Lo-Hang .panel-heading{

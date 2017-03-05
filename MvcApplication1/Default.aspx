@@ -22,12 +22,15 @@
     <link rel="stylesheet" href="App/bower_components/metisMenu/dist/metisMenu.min.css">
     <link rel="stylesheet" href="App/bower_components/angular-loading-bar/build/loading-bar.min.css">
     <link rel="stylesheet" href="App/bower_components/font-awesome/css/font-awesome.min.css" type="text/css">
+    <link href="App/bower_components/AngularJS-Toaster/toaster.min.css" rel="stylesheet" />
+
    <!-- endbuild -->
     
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="App/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="App/bower_components/angular/angular.js"></script>
+    <script src="App/bower_components/angular-animate/angular-animate.min.js"></script>
     <script src="App/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="App/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="App/bower_components/json3/lib/json3.min.js"></script>
@@ -43,15 +46,24 @@
   
     <script src="App/bower_components/angular-input-masks/angular-input-masks-standalone.js"></script>
 
+    <script src="App/bower_components/moment/moment.js"></script>
+
     <script src="App/bower_components/angular-datetime-input/polyfill.js"></script>
     <script src="App/bower_components/custom-input/dist/custom-input.js"></script>
     <script src="App/bower_components/angular-datetime-input/datetime.js"></script>
+    <script type="text/javascript" src="App/bower_components/AngularJS-Toaster/toaster.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="App/scripts/app.js"></script>
         <script src="App/scripts/services/UserService.js"></script>
+        <script src="App/scripts/services/DonHangService.js"></script>
+        <script src="App/scripts/services/KhoHangService.js"></script>
+        <script src="App/scripts/services/KenhTinService.js"></script>
+        <script src="App/scripts/services/LichSuDonHangService.js"></script>
+        <script src="App/scripts/services/LoHangService.js"></script>
+        <script src="App/scripts/services/TinBaiService.js"></script>
         <script src="App/js/sb-admin-2.js"></script>
     <!-- endbuild -->
 

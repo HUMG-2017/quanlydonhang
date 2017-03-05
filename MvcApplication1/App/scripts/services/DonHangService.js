@@ -18,11 +18,11 @@ service("DonHangService", function ($q, $timeout, $http) {
         return def.promise;
     }
 
-    DonHang.SuaDonHang = function (IdDonHang,donhang) {
+    DonHang.SuaDonHang = function (idDonHang,donhang) {
         var def = $q.defer();
         $http({
             method: "put",
-            url: '/api/donhang/' + IdDonHang,
+            url: '/api/donhang/' + idDonHang,
             data: JSON.stringify(donhang),
         }).success(function (data) {
             def.resolve(data);
@@ -52,7 +52,7 @@ service("DonHangService", function ($q, $timeout, $http) {
         var def = $q.defer();
         $http({
             method: "get",
-            url: '/api/donhang/getall',
+            url: '/api/donhang',
             // data: JSON.stringify(donhang),
         }).success(function (data) {
             def.resolve(data);

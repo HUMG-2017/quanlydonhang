@@ -1,0 +1,125 @@
+﻿<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Quản lý tài khoản</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Đổi mật khẩu
+            </div>
+            <div class="panel-body">
+                <form role="form" class="col-lg-5">
+                    <div class="form-group has-success">
+                        <label class="control-label" for="inputSuccess">Mật khẩu cũ</label>
+                        <input type="text" class="form-control" id="inputSuccess">
+                    </div>
+                    <div class="form-group has-warning">
+                        <label class="control-label" for="inputWarning">Mật khẩu mới</label>
+                        <input type="text" class="form-control" id="inputWarning">
+                    </div>
+                    <div class="form-group has-error">
+                        <label class="control-label" for="inputError">Nhập lại mật khẩu mới</label>
+                        <input type="text" class="form-control" id="inputError">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Thực hiện</button>
+                </form>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<!-- /.row -->
+<div ng-show="currentUser.Role==0" class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Thêm mới tài khoản
+            </div>
+            <div class="panel-body">
+                <form role="form" class="col-lg-6">
+                    <div class="form-group has-success">
+                        <label class="control-label" for="inputSuccess">Tên tài khoản</label>
+                        <input type="text" class="form-control" id="">
+                    </div>
+                    <div class="form-group has-success">
+                        <label class="control-label" for="inputSuccess">Mật khẩu</label>
+                        <input type="text" class="form-control" id="">
+                    </div>
+                    <div class="form-group has-success">
+                        <label class="control-label" for="inputSuccess">Quản trị kho hàng</label>
+                        <select ng-change="updateSelected(donhang)" ng-model="donhang.khoHangNhan2" class="form-control ">
+                            <option ng-init="donhang.khoHangNhan2=donhang.khoHangNhan" ng-repeat="kh in DSKhoHang" value="{{kh.id}}">{{kh.tenKho}}</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Thêm tài khoản</button>
+                </form>
+                <form role="form" class="col-lg-6">
+                    <div class="form-group has-success">
+                        <label class="control-label" for="inputSuccess">Điện thoại</label>
+                        <input type="text" class="form-control" id="">
+                    </div>
+                    <div class="form-group has-success">
+                        <label class="control-label" for="inputSuccess">Email</label>
+                        <input type="text" class="form-control" id="">
+                    </div>
+                    
+                </form>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<!--Quan tri tai khoan role 0-->
+<!-- /.row -->
+<div ng-show="currentUser.Role==0" class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+               Danh sách tài khoản
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Tài khoản</th>
+                            <th>Điện thoại</th>
+                            <th>Email</th>
+                            <th>Quản trị kho hàng</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input class="form-control"/></td>
+                            <td><input class="form-control" /></td>
+                            <td><input class="form-control" /></td>
+                            <td>
+                                <select ng-change="updateSelected(donhang)" ng-model="donhang.khoHangNhan2" class="form-control ">
+                                    <option ng-init="donhang.khoHangNhan2=donhang.khoHangNhan" ng-repeat="kh in DSKhoHang" value="{{kh.id}}">{{kh.tenKho}}</option>
+                                </select>
+                            </td>
+                            <td>
+                                <a data-placement="top" data-toggle="tooltip" title="Sửa đơn hàng"><button ng-click="ChonDonHangSua(donhang)" class="btn btn-primary btn-xs" ><i class="glyphicon glyphicon-pencil"></i> Cập nhật</button></a>
+                                <a data-placement="top" data-toggle="tooltip" title="Xóa đơn hàng"><button ng-click="SetIdDonHangCanXoa(donhang.id)" class="btn btn-danger btn-xs" ><i class="glyphicon glyphicon-trash"></i> Xóa</button></a>
+                            </td>
+                        </tr>
+                       
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>

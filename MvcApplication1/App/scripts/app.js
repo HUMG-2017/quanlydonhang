@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 /**
  * @ngdoc overview
  * @name qlVanChuyenApp
@@ -18,6 +18,8 @@ var MyApp = angular
     //'tagged.directives.infiniteScroll',
     'ui.utils.masks',
     'datetime',
+    'toaster',
+    'ngAnimate',
   ]);
 
 /*custom respone*/
@@ -26,6 +28,8 @@ MyApp.factory("baseInterceptor", ["$q", "$injector", function ($q, $injector) {
         'request': function (config) {
             //console.info(config);
             var token = localStorage.getItem("token");
+            if (token)
+                token = token.replace(new RegExp('"', 'g'), '');
             config.headers = {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Credentials': 'true',
@@ -90,7 +94,7 @@ MyApp.config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', fun
                       'App/scripts/directives/header/header.js',
                       'App/scripts/directives/header/header-notification/header-notification.js',
                       'App/scripts/directives/sidebar/sidebar.js',
-                      'App/scripts/directives/sidebar/sidebar-search/sidebar-search.js',
+                      //'App/scripts/directives/sidebar/sidebar-search/sidebar-search.js',
                       'App/scripts/directives/filter/filter.js'
                       ]
                   }),
@@ -149,10 +153,59 @@ MyApp.config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', fun
               }
           }
       })
-      .state('dashboard.form', {
-          templateUrl: 'App/views/form.html',
-          url: '/form'
+      .state('dashboard.taikhoan', {
+          templateUrl: 'App/views/taikhoan/taikhoan.html',
+          url: '/taikhoan',
+          controller: 'TaiKhoanCtrl',
+          resolve: {
+              loadMyFiles: function ($ocLazyLoad) {
+                  return $ocLazyLoad.load({
+                      name: 'qlVanChuyenApp',
+                      files: [
+                      'App/scripts/controllers/TaiKhoanCtrl.js',
+                      ]
+                  })
+              }
+          }
       })
+
+        .state('dashboard.khohang', {
+            templateUrl: 'App/views/khohang/khohang.html',
+            url: '/khohang',
+            controller: 'KhoHangCtrl',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'qlVanChuyenApp',
+                        files: [
+                        'App/scripts/controllers/KhoHangCtrl.js',
+                        ]
+                    })
+                }
+            }
+        })
+
+        .state('dashboard.lohang', {
+            templateUrl: 'App/views/lohang/lohang.html',
+            url: '/lohang',
+            controller: 'LoHangCtrl',
+            resolve: {
+                loadMyFiles: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'qlVanChuyenApp',
+                        files: [
+                        'App/scripts/controllers/LoHangCtrl.js',
+                        'App/scripts/directives/lohang/showdonhang.js',
+                        ]
+                    })
+                }
+            }
+        })
+
+    .state('dashboard.form', {
+        templateUrl: 'App/views/form.html',
+        url: '/form'
+    })
       .state('dashboard.blank', {
           templateUrl: 'App/views/pages/blank.html',
           url: '/blank'
@@ -284,7 +337,7 @@ MyApp.run(function (jwtHelper, $rootScope, $http, $state, $timeout, $stateParams
                         var dataUser = localStorage.getItem("currentUser");
                         dataUser = JSON.parse(dataUser);
                         $rootScope.currentUser.Role = dataUser.role;
-                        $rootScope.currentUser.Id = dataUser.nameid;
+                        $rootScope.currentUser.IdStore = dataUser.groupsid;
                         $rootScope.currentUser.TaiKhoan = dataUser.unique_name;
                         console.log(JSON.stringify($rootScope.currentUser));
                     } catch (err) {
@@ -301,3 +354,12 @@ MyApp.run(function (jwtHelper, $rootScope, $http, $state, $timeout, $stateParams
     };
 
 });
+
+
+MyApp.filter('nfcurrency', ['$filter', '$locale', function ($filter, $locale) {
+    var currency = $filter('currency'), formats = $locale.NUMBER_FORMATS;
+    return function (amount, symbol) {
+        var value = currency(amount, symbol);
+        return value.replace(new RegExp('\\' + formats.DECIMAL_SEP + '\\d{2}'), '')
+    }
+}])

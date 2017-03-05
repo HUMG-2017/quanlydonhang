@@ -31,7 +31,7 @@ namespace MvcApplication1.Controllers
 
         // POST api/dangnhap
         [AllowAnonymous]
-        public HttpResponseMessage Post([FromBody]User user)
+        public HttpResponseMessage Post([FromBody]QuanLyTaiKhoan user)
         {
             try
             {
@@ -41,15 +41,32 @@ namespace MvcApplication1.Controllers
                 databaseDataContext db = new databaseDataContext();
 
                 //QuanLyTaiKhoan result = db.QuanLyTaiKhoans.Where(o => o.TaiKhoan == TaiKhoan).SingleOrDefault();
-                var result = db.QuanLyTaiKhoans.Where(taikhoan => taikhoan.TaiKhoan == TaiKhoan).Join(db.QuanLyKhoHangs, taikhoan => taikhoan.IdKhoHang, khohang => khohang.Id, (taikhoan, khohang) => new { taikhoan.Id, taikhoan.IdKhoHang, taikhoan.TaiKhoan, taikhoan.MatKhau, khohang.CapKho }).SingleOrDefault();
+                var result = (dynamic)null;
+                if(TaiKhoan.Equals("admin")){
+                   result = db.QuanLyTaiKhoans.Where(taikhoan => taikhoan.TaiKhoan == TaiKhoan).SingleOrDefault();
+                }
+                else
+                {
+                    result = db.QuanLyTaiKhoans.Where(taikhoan => taikhoan.TaiKhoan == TaiKhoan).Join(db.QuanLyKhoHangs, taikhoan => taikhoan.IdKhoHang, khohang => khohang.Id, (taikhoan, khohang) => new { taikhoan.Id, taikhoan.IdKhoHang, taikhoan.TaiKhoan, taikhoan.MatKhau, khohang.CapKho }).SingleOrDefault();
+                }
+                    
                 if (result != null) { 
                 
                     if (MatKhau.Equals(result.MatKhau))
                     {
+                        //Truong hop admin
                         //Cache Session
-                        HttpContext.Current.Session.Add("Role", result.CapKho.ToString());
+                        if (TaiKhoan.Equals("admin")){
+                            HttpContext.Current.Session.Add("Role", "0");
+                            HttpContext.Current.Session.Add("IdStore", "0");
+                        }
+                        else
+                        {
+                            HttpContext.Current.Session.Add("IdStore", result.IdKhoHang.ToString());
+                            HttpContext.Current.Session.Add("Role", result.CapKho.ToString());
+                        }
+                       
                         HttpContext.Current.Session.Add("UserName", result.TaiKhoan.ToString());
-                        HttpContext.Current.Session.Add("Id", result.Id.ToString());
 
                         var token = JwtManager.GenerateToken(TaiKhoan);
                         return Request.CreateResponse(HttpStatusCode.OK, token);

@@ -1,0 +1,62 @@
+﻿<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Quản lý lô hàng</h1>
+    </div>
+</div>
+
+<!-- /.row -->
+<div class="row" ng-show="currentUser.Role==2">
+    <div class="col-lg-12">
+        <p ng-show="LoHang.length==0">Không có dữ liệu</p>
+    </div>
+    <div class="col-lg-12">
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default" ng-repeat="lohang in LoHang">
+                <div class="panel-heading" style="display:inline-block;width:100%">
+                    <h4 class="panel-title pull-left">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#/dashboard/lohang#{{lohang.id}}">Lô hàng ngày {{lohang.thoiGian|date:'dd/MM/yyyy':'+0007'}}</a>
+                    </h4>
+                    <button data-toggle="modal" data-target="#cuocvekhorole2" ng-click="NhapCuocVeKho(lohang)" class="btn btn-sm btn-success pull-right">Xử lý</button>
+                    <div class="clear-fix"></div>
+                </div>
+                <div id="{{lohang.id}}" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <p>Thông tin đơn hàng trong lô</p>
+                        <show-donhang mang-donhang="lohang.listIdDonHang"></show-donhang>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- /.row -->
+<!--Model nhap gia lo role 2-->
+<div ng-show="currentUser.Role==2" class="modal modal-lg fade" id="cuocvekhorole2" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                <h4 class="modal-title custom_align" id="Heading">Nhập cước về kho</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-lg-12">
+                        <label for="tenkhachhang">Cước về kho:</label>
+                        <input name="field" ng-model="lohang.cuocVeKho" type="text" class="form-control" id="tenkhachhang" placeholder="Nhập cước về kho" ui-money-mask="0">
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer ">
+                <button type="button" class="btn btn-success" ng-click="CapNhatCuocVeKho()"><span class="glyphicon glyphicon-ok-sign"></span> Đồng ý</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Hủy bỏ</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+
+
+

@@ -12,54 +12,37 @@
     <div class="panel-body" ng-show="showBox">
         <div ng-show="LoHang.length==0"><p><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;<b>Tích chọn đơn hàng bên phải để thêm vào lô hàng mới!</b></p></div>
         <ul class="chat">
-            <li ng-class="{left:$index%2==0,right:$index%2==1}" class="clearfix" ng-repeat="item in LoHang">
-                <span ng-class="{'pull-left':$index%2==0,'pull-right':$index%2==1}" class="chat-img">
-                    <select id="select-kho" class="form-control ">
-                        <option value="two">Hà nội</option>
-                        <option value="three">Lào Cai</option>
-                    </select>
-                </span>
+            <li ng-class="{left:$index%2==0,right:$index%2==1}" class="clearfix" ng-repeat="donhang in LoHang">
                 <div class="chat-body clearfix">
                     <div class="header">
-                        <p><strong class="primary-font">{{item.TenHang}}</strong></p>
+                        <span class="chat-img">
+                            <!--ng-options="khohang as khohang.tenKho for khohang in DSKhoHang track by khohang.id"-->
+                            <select ng-change="updateSelected(donhang)" ng-model="donhang.khoHangNhan2" class="form-control ">
+                                <option ng-init="donhang.khoHangNhan2=donhang.khoHangNhan" ng-repeat="kh in DSKhoHang" value="{{kh.id}}">{{kh.tenKho}}</option>
+                            </select>
+                        </span>
                     </div>
                     <p>
-                        San pham: Iphone 7
+                        <strong class="primary-font">Tên hàng: {{donhang.tenHang}}</strong>
                     </p>
                     <p>
-                        Mau: den
+                        Tên khách: {{donhang.tenKhach}}
+                    </p>
+                    <p>
+                        Ngày đặt: {{donhang.ngayDatHang|date:'dd/MM/yyyy':'+0007'}}
                     </p>
                 </div>
             </li>
-            <!--<li class="right clearfix">
-                <span class="chat-img pull-right">
-                    <select id="select-kho" class="form-control ">
-                        <option value="two">Hà nội</option>
-                        <option value="three">Lào Cai</option>
-                    </select>
-                </span>
-                <div class="chat-body clearfix">
-                    <div class="header">
-                        <p><strong class="primary-font">MH-1111</strong></p>
-                    </div>
-                    <p>
-                        San pham: Máy hút bụi
-                    </p>
-                    <p>
-                        Mau: den
-                    </p>
-                </div>
-            </li>-->
-           
+
         </ul>
     </div>
     <!-- /.panel-body -->
     <div class="panel-footer" ng-show="showBox">
         <div class="input-group">
-            <input name="field" ng-model="gialobien" ui-money-mask="0" id="btn-input" type="text" class="form-control input-sm" placeholder="Nhập giá cước lô biên">
+            <input name="field" ng-model="cuocLoBien" ui-money-mask="0" type="text" class="form-control input-sm" placeholder="Nhập giá cước lô biên">
             <span class="input-group-btn">
-                <button class="btn btn-warning btn-sm" id="btn-chat">
-                    Tạo
+                <button ng-click="TaoLoHang(cuocLoBien)" class="btn btn-warning btn-sm" id="btn-chat">
+                    Tạo Lô
                 </button>
             </span>
         </div>
